@@ -1,0 +1,91 @@
+.navbar {
+    background-color: rgb(36, 36, 237);
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+#nav-text {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-btn {
+    margin-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#search-input {
+  padding-left: 10px;
+  padding-right: 10px;  
+}
+
+#search-text {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.column {
+    float: left;
+    width: 25%;
+    padding: 0 30px;
+    padding-bottom: 20px;
+    position: relative;
+  }
+
+  #forecast {
+    padding-bottom: 20px;
+  }
+  
+      /* Set gray background color and 100% height */
+      .sidenav {
+        padding-top: 20px;
+        background-color: #f1f1f1;
+        height: 150%;
+      }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+
+  /* Remove extra left and right margins, due to padding */
+  .row {margin: 0 -5px;}
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive columns */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+}
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    text-align: center;
+    background-color: #f1f1f1;
+  }
+
+     /* Set black background color, white text and some padding */
+  footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+  }
