@@ -15,35 +15,67 @@ const day2 = document.getElementById("day-2");
 const day3 = document.getElementById("day-3");
 const day4 = document.getElementById("day-4");
 const day5 = document.getElementById("day-5");
+const inputListEl = document.getElementById("input-list");
 
-
+const searchHistory = JSON.parse(localStorage.getItem("city")) || [];
 
 // Add method to fetch and display weather data
 function displayWeather() {
   searchBtn.addEventListener("click", () => {
     cityName = searchInput.value;
+
     const url = `${weatherApiUrl}&q=${cityName}`;
+
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        for (var i = 0; i < 5; i++) {
+        console.log(data);
+        for (var i = 0; i < 6; i++) {
+          const expect = data.list[i * 8];
           const day = document.getElementById(`day-${i + 1}`);
-          const date = new Date(data.list[i].dt_txt);
-          const dateString = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-          // const weatherIcon="https://openweathermap.org/img/w/" + response.weather[i].icon + ".png";
-          // day.querySelector(".icon").innerHTML = `${weatherIcon}`;
-          day.querySelector(".date").innerHTML = `Date: ${dateString}`;
+          day
+            .querySelector(".icon")
+            .setAttribute(
+              "src",
+              `https://openweathermap.org/img/wn/${expect.weather[0].icon}@2x.png`
+            );
+          day.querySelector(".date").innerHTML = new Date(
+            expect.dt * 1000
+          ).toDateString();
           day.querySelector(".cityName").innerHTML = data.city.name;
-          day.querySelector(".temp").innerHTML = `Temperature: ${data.list[i].main.temp}°F`;
-          day.querySelector(".humidity").innerHTML = `Humidity: ${data.list[i].main.humidity}%`;
-          day.querySelector(".wind").innerHTML = `Wind Speed: ${data.list[i].wind.speed} m/s`;
+          day.querySelector(
+            ".temp"
+          ).innerHTML = `Temperature = ${expect.main.temp}°F`;
+          day.querySelector(
+            ".humidity"
+          ).innerHTML = `Humidity = ${expect.main.humidity}%`;
+          day.querySelector(
+            ".wind"
+          ).innerHTML = `Wind = ${expect.wind.speed} mph`;
         }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
       });
-
-    
+    searchHistory.push(cityName);
+    localStorage.setItem("city", JSON.stringify(searchHistory));
+    for (let i = 0; i < searchHistory.length; i++) {
+      const searchHistory = JSON.parse(localStorage.getItem("city")) || [];
+      inputListEl.innerHTML = "";
+      const city = searchHistory[i];
+      const li = document.createElement("li");
+      li.textContent = city;
+      inputListEl.append(li);
+    }
   });
 }
 displayWeather();
+
+// function getLocalStorage() {
+//   const searchHistory = JSON.parse(localStorage.getItem("city")) || [];
+//   inputListEl.innerHTML = "";
+//   for (let i = 0; i < searchHistory.length; i++) {
+//     const city = searchHistory[i];
+//     const li = document.createElement("li");
+//     li.textContent = city;
+//     inputListEl.append(li);
+//   }
+// }
+// getLocalStorage();
