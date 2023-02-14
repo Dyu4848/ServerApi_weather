@@ -54,6 +54,7 @@ function displayWeather() {
           ).innerHTML = `Wind = ${expect.wind.speed} mph`;
         }
       });
+    // Get Local Storage to Display
     searchHistory.push(cityName);
     localStorage.setItem("city", JSON.stringify(searchHistory));
     for (let i = 0; i < searchHistory.length; i++) {
